@@ -146,9 +146,9 @@ a {
     color: #D66A3A
 }
 
-a:active, a:focus, a:hover {
-    color: #299BC5
-}
+    a:active, a:focus, a:hover {
+        color: #299BC5
+    }
 
 .floating-icon {
     position: fixed;
@@ -169,19 +169,19 @@ a:active, a:focus, a:hover {
     animation: pulse 2s infinite;
 }
 
-.floating-icon:hover {
-background-image: linear-gradient(270deg, #D66A3A, #299BC5);
-background-size: 400% 400%;
-animation: colorChange 5s ease infinite;
-}
+    .floating-icon:hover {
+        background-image: linear-gradient(270deg, #D66A3A, #299BC5);
+        background-size: 400% 400%;
+        animation: colorChange 5s ease infinite;
+    }
 
-.floating-icon:hover svg {
-    stroke: #ffffff;
-}
+        .floating-icon:hover svg {
+            stroke: #ffffff;
+        }
 
-.floating-icon i {
-font-size: 24px;
-}
+    .floating-icon i {
+        font-size: 24px;
+    }
 
 @keyframes pulse {
     0% {
@@ -213,6 +213,8 @@ font-size: 24px;
         background-position: 0% 50%;
     }
 }
+
+/* Popup text CSS */
 
 .popup-text {
     display: none;
@@ -261,7 +263,7 @@ font-size: 24px;
 
 .img-profile {
     border-radius: 50%;
-    animation: glowing 2s infinite alternate;
+    animation: glowing 1s infinite alternate;
 }
 
 @keyframes bounce {
@@ -281,31 +283,85 @@ font-size: 24px;
 
 
 .list-social-icons .fa-stack {
-    animation: bounce 3s ease-in-out infinite;
+    animation: bounce 4s ease-in-out infinite;
     position: relative;
 }
 
-.list-social-icons .fa-stack::before {
-    content: "";
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    padding: 5px;
+    .list-social-icons .fa-stack::before {
+        content: "";
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #D66A3A;
+        color: white;
+        font-size: 14px;
+        width: auto;
+        white-space: nowrap;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 10px;
+    }
+
+
+    .list-social-icons .fa-stack[data-tooltip]:hover::before {
+        content: attr(data-tooltip);
+        opacity: 1;
+    }
+
+/* Skills icon wave animation. */
+
+/* Define the keyframes for the highlight and wave animation */
+@keyframes highlight-wave {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Add the enlarge effect on hover */
+.list-inline-item.skill-icon {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+    .list-inline-item.skill-icon:hover {
+        transform: scale(1.6);
+    }
+
+
+/* Display the popup text when hovering over the icon */
+.list-inline-item.skill-icon:hover .popup-text {
+    display: block;
+}
+
+/*Image*/
+
+.project-image-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.project-image {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
     border-radius: 5px;
-    background-color: #D66A3A;
-    color: white;
-    font-size: 14px;
-    width: auto;
-    white-space: nowrap;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-.list-social-icons .fa-stack[data-tooltip]:hover::before {
-    content: attr(data-tooltip);
-    opacity: 1;
-}
