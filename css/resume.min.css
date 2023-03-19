@@ -216,11 +216,15 @@ a {
 
 /* Popup text CSS */
 
+.social-icon {
+    position: relative;
+}
+
 .popup-text {
     display: none;
     position: absolute;
-    top: 0;
-    right: 100%;
+    top: 100%;
+    left: 0;
     padding: 10px 15px;
     background-color: #D66A3A;
     color: #ffffff;
@@ -228,15 +232,16 @@ a {
     font-size: 14px;
     white-space: nowrap;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-    margin-right: 10px;
+    margin-top: 10px;
     max-width: 200px;
     line-height: 1.4;
-    transform: translateY(-50%);
 }
 
-.floating-icon:hover .popup-text {
+.social-icon:hover .popup-text {
     display: block;
 }
+
+/*Profile lighing effect*/
 
 @media (max-width: 992px) {
     .navbar-brand {
