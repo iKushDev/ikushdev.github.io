@@ -8,952 +8,1804 @@
     <meta name="author" content="Kushan Devarajegowda">
     <title>Kushan Devarajegowda - Software Engineer</title>
     <link rel="shortcut icon" type="image/png" href="img/profile_icon.png">
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template -->
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.14.0/devicon.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-          rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/resume.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+            .animated-bg::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+                animation: float 20s ease-in-out infinite;
+            }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 2rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .sidebar.hidden {
+                transform: translateX(-100%);
+            }
+
+        .profile-section {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: var(--primary-gradient);
+            padding: 4px;
+            margin: 0 auto 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+            .profile-img:hover {
+                transform: scale(1.05) rotate(5deg);
+                box-shadow: var(--shadow-intense);
+            }
+
+            .profile-img img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .nav-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: var(--primary-gradient);
+                transition: all 0.3s ease;
+                z-index: -1;
+            }
+
+            .nav-link:hover::before,
+            .nav-link.active::before {
+                left: 0;
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                color: white;
+                transform: translateX(10px);
+            }
+
+            .nav-link i {
+                margin-right: 0.8rem;
+                font-size: 1.1rem;
+                width: 20px;
+            }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .main-content.expanded {
+                margin-left: 0;
+            }
+
+        .section {
+            min-height: 100vh;
+            padding: 4rem 3rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: transparent;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--secondary-gradient);
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-intense);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .content-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: var(--primary-gradient);
+            }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: var(--secondary-gradient);
+                border-radius: 2px;
+            }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .experience-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 4px;
+                height: 100%;
+                background: var(--primary-gradient);
+                transform: scaleY(0);
+                transition: all 0.3s ease;
+            }
+
+            .experience-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-intense);
+            }
+
+                .experience-card:hover::before {
+                    transform: scaleY(1);
+                }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .job-company {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .job-duration {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .achievements {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+            .achievements li {
+                margin: 0.8rem 0;
+                padding-left: 1.5rem;
+                position: relative;
+                line-height: 1.6;
+            }
+
+                .achievements li::before {
+                    content: '✦';
+                    position: absolute;
+                    left: 0;
+                    color: #667eea;
+                    font-weight: bold;
+                }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .skill-category:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-intense);
+            }
+
+            .skill-category h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: var(--text-primary);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .skill-tag:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+            .project-card:hover {
+                transform: translateY(-10px) rotateX(5deg);
+                box-shadow: var(--shadow-intense);
+            }
+
+        .project-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .project-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-live {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-award {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .project-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .tech-tag {
+            padding: 0.2rem 0.6rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* Awards Section */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .award-category {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .award-category:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-intense);
+            }
+
+            .award-category h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+        .award-list {
+            list-style: none;
+        }
+
+            .award-list li {
+                margin: 1rem 0;
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 10px;
+                border-left: 4px solid #667eea;
+            }
+
+        .award-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .award-org {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+            .contact-item:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-intense);
+            }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+            .social-link:hover {
+                transform: translateY(-3px) scale(1.1);
+                box-shadow: var(--shadow-intense);
+            }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+            .mobile-toggle:hover {
+                transform: scale(1.1);
+            }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-in-delay {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+                .sidebar.active {
+                    transform: translateX(0);
+                }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .projects-grid,
+            .skills-grid,
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1002;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: var(--secondary-gradient);
+            transition: width 0.1s ease;
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
-<body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <img class="img-fluid img-profile d-lg-none rounded-circle" src="img/profile.jpg" alt="">
-            <span class="d-block d-lg-none">Kushan Devarajegowda</span>
-            <span class="d-none d-lg-block">
-                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-            </span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container-fluid p-0">
-        <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-            <div class="my-auto">
-                <h1 id="typed-output"></h1>
-                <h1 class="mb-0">
-                    <span class="text-primary">I</span> am <span class="text-primary">Kush</span>an <span class="text-primary">Dev</span>arajegowda
-                </h1>
-                <div class="subheading mb-5">
-                    <i class="fas fa-map-marker-alt" style="margin: 0 5px;"></i>
-                    <a href="https://www.google.com/maps/search/San+Jose,+CA" target="_blank">
-                        San Jose, CA
-                    </a> |
-
-                    <i class="fas fa-phone-alt" style="margin: 0 5px;"></i>
-                    <a href="tel:(716) 256-4670">
-                        (716) 256-4670
-                    </a>
-                    <i class="fas fa-envelope" style="margin: 0 5px;"></i>
-                    <a href="mailto:kushanraj13@yahoo.in?subject=Connection%20from%20your%20portfolio%20-%20Kushan&body=Hi%20Kushan%2C%20I%20am%20%5BYourName%5D%2C%20your%20portfolio%20caught%20my%20eye%20and%20would%20like%20to%20connect%20with%20you.%0A">
-                        kushanraj13@yahoo.in
-                    </a>
-                </div>
-                <p class="mb-5">
-                    Hey there! I'm a Software Engineer with 8+ years of experience and a Master's degree in Computer Science, specializing in distributed systems and scalable software solutions. Currently working as an R&D Engineer at Broadcom, where I single-handedly develop and deploy internal tools and infrastructure solutions for on-premise environments. I focus on building scalable systems that support IC characterization workflows and RF wireless technology development, creating robust tooling that empowers engineering teams across the organization. My expertise spans from low-level systems programming in C++ to cloud-native architectures, with a passion for building high-performance applications that solve complex infrastructure challenges and streamline development workflows.
-                </p>
-                <p class="availability-announcement mb-5">
-                    <div class="announcement-item d-flex align-items-center mb-2">
-                        <div class="icon mr-2">
-                            <i class="fa fa-rocket"></i>
-                        </div>
-                        <div class="text">
-                            <strong>Currently at <span class="text-primary">Broadcom</span></strong> as <span class="text-primary">R&D Engineer</span>, building next-generation wireless technology testing framework solutions
-                        </div>
-                    </div>
-                    <div class="announcement-item d-flex align-items-center mb-2">
-                        <div class="icon mr-2">
-                            <i class="fa fa-lightbulb-o"></i>
-                        </div>
-                        <div class="text">
-                            <strong>Casually exploring opportunities</strong> to build innovative things that push technological boundaries and create meaningful impact
-                        </div>
-                    </div>
-                    <div class="announcement-item d-flex align-items-center mb-2">
-                        <div class="icon mr-2">
-                            <i class="fa fa-code"></i>
-                        </div>
-                        <div class="text">
-                            <strong>
-                                Passionate about distributed systems, clean architecture, performance optimization, and mentoring the next generation of developers
-                            </strong>
-                        </div>
-                    </div>
-                    <div class="announcement-item d-flex align-items-center">
-                        <div class="icon mr-2">
-                            <i class="fa fa-coffee"></i>
-                        </div>
-                        <div class="text">
-                            <strong>
-                                Always excited to discuss tech, collaborate on interesting projects, or grab coffee to talk about the future of software engineering
-                            </strong> -
-                            <a href="mailto:kushanraj13@yahoo.in?subject=Let's%20connect!%20-%20Tech%20Discussion&body=Hello%20Kushan%2C%20%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20connect%20and%20discuss%20%5Btopic%5D.%20%0A%0ABest%2C%0A%5BYour%20Name%5D%0A">Let's connect!</a>
-                        </div>
-                    </div>
-                </p>
-                <ul class="list-inline list-social-icons mb-0">
-                    <li class="list-inline-item social-icon">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="https://www.linkedin.com/in/kushan-devarajegowda/">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <span class="popup-text">LinkedIn</span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item social-icon">
-                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/devkushgowda">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <span class="popup-text">GitHub</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-            <div class="my-auto">
-                <h2 class="mb-5">Experience</h2>
-
-                <!-- Broadcom Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/broadcom.png" alt="Broadcom Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">R&D Engineer Software 3</h3>
-                                <div class="subheading mb-3">Broadcom, San Jose, CA, United States</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Develop leading-edge IC characterization test software solutions, <strong>targeting the RF portion of wireless cellular handsets</strong> to ensure optimal performance and compliance.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Automate various processes related to data management, analysis, visualization, and reporting, <strong>improving efficiency and reducing manual intervention</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Support a wide internal user base across multiple Broadcom teams and global sites, <strong>focusing on software scalability, modularity, and standardization</strong> for maximum efficiency.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Develop backend .NET software using object-oriented programming principles, <strong>ensuring robust and maintainable code architecture</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Design innovative and efficient test algorithms, <strong>reducing overall test times and simplifying user experience</strong> while maintaining accuracy.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Collaborate with cross-functional teams across different sites to <strong>standardize software solutions and best practices</strong>, ensuring consistency and quality.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Feb 2024 – Present</span>
-                    </div>
-                </div>
-
-                <!-- University at Buffalo Research -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/ub.png" alt="University at Buffalo Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Research Volunteer</h3>
-                                <div class="subheading mb-3">University at Buffalo, Buffalo, NY, United States</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Conducted comprehensive study on ransomware threats with potential impacts on critical infrastructures, <strong>addressing key vulnerabilities and threat vectors</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Designed and executed simulation experiments to detect ransomware using advanced machine learning and deep learning techniques, <strong>enhancing malware identification accuracy</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Leveraged statistical analysis and model training to develop algorithms capable of <strong>predicting and mitigating ransomware attacks in real-time scenarios</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Jan 2024 – Feb 2024</span>
-                    </div>
-                </div>
-
-                <!-- Amazon Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/amazon.png" alt="Amazon Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Software Development Engineer Intern</h3>
-                                <div class="subheading mb-3">Amazon, Seattle, WA, United States</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Contributed to the development of a robust ML infrastructure pipeline, <strong>specifically designed for high-scale, real-time and precise risk assessments</strong> for identifying potential IP infringements in retail listing products across the globe.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Engineered a scalable API service, <strong>enabling efficient bulk product integration into the risk evaluation pipeline</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Created a user-centric web interface using React with TypeScript, <strong>offering real-time tracking and reporting of risk evaluations</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Utilized serverless architecture with AWS Fargate <strong>enhancing system scalability while cutting operational costs by 20%</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Implemented up to 60% coverage of integration tests for both functional and non-functional requirements, <strong>integrated into the CI/CD pipeline to improve system stability and efficiency</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Achieved 99% code coverage through comprehensive unit testing, <strong>ensuring the reliability of the API service</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">May 2023 – Aug 2023</span>
-                    </div>
-                </div>
-
-                <!-- VMware Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/vmware.png" alt="VMware Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Member of Technical Staff 3</h3>
-                                <div class="subheading mb-3">VMware, Bangalore, India</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Enhanced the performance and user experience of VMware Workspace ONE, a distributed cloud service, <strong>for a smoother and more efficient digital workspace solution</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Improved system performance by conducting detailed analysis and optimization of database queries and API calls, <strong>reducing API response times and enabling more efficient user interactions</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Engaged in collaborative code reviews and mentored junior developers, <strong>enhancing code quality and team skill sets</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Actively participated in design reviews and addressed design flaws to <strong>ensure product adaptability and scalability challenges</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Took charge of fixing critical bugs and new feature development, <strong>quickly resolving issues and ensuring system reliability</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Jan 2022 – Aug 2022</span>
-                    </div>
-                </div>
-
-                <!-- Philips Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/philips.jpg" alt="Philips Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Software Engineer 2</h3>
-                                <div class="subheading mb-3">Philips, Bangalore, India</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Collaboratively worked on an IoT data collection project focused on clinical devices, <strong>enhancing efficiency and enabling predictive analysis of device failure</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Achieved 100% test coverage through unit tests and further optimized testing by reducing effort by 40% via integration tests, <strong>resulting in a 25% time saving in the testing phase</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Worked on serverless batch data processing and storing, <strong>offering a scalable and cost-effective solution for clinical data</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Implemented a remote service for device management, <strong>facilitating real-time updates and remote troubleshooting</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Developed an auto-updates portal, <strong>ensuring devices remain up to date with the latest firmware and security patches</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">May 2020 – Jan 2022</span>
-                    </div>
-                </div>
-
-                <!-- TeleDNA Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/teledna.jpg" alt="TeleDNA Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Senior Software Engineer</h3>
-                                <div class="subheading mb-3">TeleDNA Communications, Bangalore, India</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Redesigned the entire SMS Center (SMSC) system for enhanced scalability and performance, <strong>ensuring robust system functionality to handle increased messaging traffic efficiently</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Led the integration of omni-channel messaging platforms, including WhatsApp and other messenger services, <strong>facilitating a seamless multi-channel communication environment</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Developed and optimized back-end systems primarily using C++ on a Linux platform, incorporating technologies such as Apache Kafka and SQL to <strong>enhance data processing capabilities and system reliability</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Addressed and resolved complex technical issues, <strong>contributing to the continuous improvement of the software development lifecycle and product quality</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Nov 2019 – May 2020</span>
-                    </div>
-                </div>
-
-                <!-- One Identity Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/oneidentity.png" alt="One Identity Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Associate Software Development Engineer</h3>
-                                <div class="subheading mb-3">One Identity, Bangalore, India</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Strengthened system security with advanced authorization, <strong>reinforcing the company's leadership in IAM</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Integrated federated authentication using Azure Active Directory, <strong>enhancing user security and management</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Added caching strategies for STS microservice, <strong>reducing API latency by 30% and improving user experience</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Incorporated role-based access control (RBAC) through OAuth 2.0, <strong>refining user permissions and security by ensuring users operate with the minimum necessary privileges</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Developed connectors for third-party vendors, <strong>enabling seamless service utilization and expanding product compatibility</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Integrated Twilio for OTP, call, and push notifications, <strong>enhancing user authentication and streamlining communication workflows</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Architected and deployed enterprise Radius authentication service, <strong>further enhancing network security and user management</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Oct 2018 – Nov 2019</span>
-                    </div>
-                </div>
-
-                <!-- Appled Materials Experience -->
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/applied-materials.png" alt="ASM Technologies Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Software Engineer</h3>
-                                <div class="subheading mb-3">Applied Materials, Bangalore, India</div>
-                            </div>
-                        </div>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Developed and enhanced a test automation framework, focusing on robust real-time robotic software, which <strong>significantly improved testing processes</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Contributed to a critical simulation software project that simulates real-world behaviors of fab robots by generating analog and digital signals, <strong>enhancing the system's predictive capabilities</strong>.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-check"></i>
-                                Utilized technologies such as C++, C#, Windows, Jira, and ClearCase in an Agile environment, <strong>applying expertise in algorithms, data structures, WinForms, and socket programming</strong>.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2017 – Aug 2018</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
-            <div class="my-auto">
-                <h2 class="mb-5">Education</h2>
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/ub.png" alt="University at Buffalo Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">The State University of New York, Buffalo, NY, United States</h3>
-                                <div class="subheading mb-3">Master of Science - MS</div>
-                            </div>
-                        </div>
-                        <div><strong>Computer Science</strong> - Distributed Cloud Systems Track</div>
-                        <p><strong>GPA:</strong> 3.75</p>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>Courseworks:</strong> Distributed Systems, Information Retrieval, Database Systems, Machine Learning, Advanced Data Structures, Modern Networking Concepts, Design and Analysis of Algorithms, Project Development & Wireless Networks Security.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-trophy text-warning"></i>
-                                <strong>Accomplishments:</strong> Served as a Graduate Teaching Assistant for Modern Networking Concepts, leading weekly discussions, grading assignments and exams, assisting course development, and maintaining a positive learning environment.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2022 - Jan 2024</span>
-                    </div>
-                </div>
-                <div class="resume-item d-flex flex-column flex-md-row">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/toce.jpg" alt="Oxford College Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">The Oxford College of Engineering (VTU), Bangalore, India</h3>
-                                <div class="subheading mb-3">Bachelor of Science - BS</div>
-                            </div>
-                        </div>
-                        <div><strong>Computer Science</strong> - Software Engineering Track</div>
-                        <p><strong>GPA:</strong> 3.5 Equivalent</p>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>Courseworks:</strong> Operating Systems, Software Engineering, Database Management Systems, Compiler Design, Network Security, Data Structures, Java Programming, .Net Programming, Software Testing, Unix, and Object-Oriented Programming in C++.
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-trophy text-warning"></i>
-                                <strong>Accomplishments:</strong> Organized and led well-attended technical workshops on web development, software design, and cybersecurity for students, with positive feedback from participants and faculty.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2013 - Jul 2017</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-            <div class="my-auto">
-                <h2 class="mb-5">Skills</h2>
-                <ul class="list-inline list-icons">
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-cplusplus-plain"></i>
-                        <span class="popup-text">C++</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-csharp-plain"></i>
-                        <span class="popup-text">C#</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-java-plain-wordmark"></i>
-                        <span class="popup-text">Java</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-python-plain"></i>
-                        <span class="popup-text">Python</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-go-original-wordmark"></i>
-                        <span class="popup-text">Go</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-typescript-plain"></i>
-                        <span class="popup-text">TypeScript</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-javascript-plain"></i>
-                        <span class="popup-text">JavaScript</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-dotnetcore-plain"></i>
-                        <span class="popup-text">.NET Core</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-spring-plain"></i>
-                        <span class="popup-text">Spring Boot</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-django-plain-wordmark"></i>
-                        <span class="popup-text">Django</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-flask-original-wordmark"></i>
-                        <span class="popup-text">Flask</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-nodejs-plain"></i>
-                        <span class="popup-text">Node.js</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-react-original"></i>
-                        <span class="popup-text">React</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-mysql-plain-wordmark"></i>
-                        <span class="popup-text">MySQL</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-postgresql-plain-wordmark"></i>
-                        <span class="popup-text">PostgreSQL</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-mongodb-plain"></i>
-                        <span class="popup-text">MongoDB</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-redis-plain-wordmark"></i>
-                        <span class="popup-text">Redis</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-apachekafka-original-wordmark"></i>
-                        <span class="popup-text">Apache Kafka</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-amazonwebservices-original"></i>
-                        <span class="popup-text">AWS</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-azure-plain"></i>
-                        <span class="popup-text">Azure</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-googlecloud-plain-wordmark"></i>
-                        <span class="popup-text">Google Cloud</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-docker-plain"></i>
-                        <span class="popup-text">Docker</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-kubernetes-plain"></i>
-                        <span class="popup-text">Kubernetes</span>
-                    </li>
-                    <li class="list-inline-item skill-icon">
-                        <i class="devicon-git-plain-wordmark"></i>
-                        <span class="popup-text">Git</span>
-                    </li>
-                </ul>
-
-                <div class="subheading mb-3">Programming Languages & Core Technologies</div>
-                <ul class="fa-ul mb-0">
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Systems Programming:</strong> C, C++, Go
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Backend Development:</strong> C#, Java, Python, TypeScript, JavaScript
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Web Technologies:</strong> REST APIs, gRPC, Protobuf, GraphQL
-                    </li>
-                </ul>
-
-                <div class="subheading mb-3">Frameworks & Platforms</div>
-                <ul class="fa-ul mb-0">
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Backend Frameworks:</strong> .NET Core, .NET MVC, ASP.NET, Spring Boot, Django, Flask, Node.js
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Frontend:</strong> React, TypeScript, HTML5, CSS3, JavaScript ES6+
-                    </li>
-                </ul>
-
-                <div class="subheading mb-3">Data & Cloud Technologies</div>
-                <ul class="fa-ul mb-0">
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Databases:</strong> MySQL, PostgreSQL, MongoDB, Cassandra, Redis, NoSQL
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Cloud Platforms:</strong> AWS (EC2, S3, Lambda, Fargate, RDS), Azure, Google Cloud Platform
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Message Queues:</strong> Apache Kafka, Apache Spark, RabbitMQ
-                    </li>
-                </ul>
-
-                <div class="subheading mb-3">Software Engineering & DevOps</div>
-                <ul class="fa-ul mb-0">
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Architecture:</strong> Microservices, Distributed Systems, Event-Driven Architecture, Design Patterns
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>DevOps & CI/CD:</strong> Docker, Kubernetes, Jenkins, Git, GitHub Actions, Infrastructure as Code
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Testing:</strong> Unit Testing, Integration Testing, Test Automation, JUnit, Jest, Performance Testing
-                    </li>
-                    <li>
-                        <i class="fa-li fa fa-check"></i>
-                        <strong>Methodologies:</strong> Agile, Scrum, SAFe, SDLC, Code Reviews, Technical Leadership
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="projects">
-            <div class="my-auto">
-                <h2 class="mb-5">Featured Projects</h2>
-
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/puppyworld.jpg" alt="PuppyWorld Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">PuppyWorld - Complete Pet Service Platform</h3>
-                                <div class="subheading mb-3">
-                                    <a target="_blank" rel="noopener noreferrer" href="https://puppyworld.in/">www.puppyworld.in</a>
-                                    <span class="badge badge-primary ml-2">Live Production</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>
-                            Spearheaded a complete cloud-based pet service platform from concept to production. Features include breed identification using ML.Net, comprehensive encyclopedia, e-commerce portal, community forums, and adoption portal. Built with modern tech stack including .NET Core, MongoDB, Redis, Azure cloud services, and machine learning capabilities. Demonstrates end-to-end cloud application lifecycle management.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="badge badge-secondary">.NET Core</span>
-                            <span class="badge badge-secondary">MongoDB</span>
-                            <span class="badge badge-secondary">Redis</span>
-                            <span class="badge badge-secondary">Azure</span>
-                            <span class="badge badge-secondary">ML.Net</span>
-                            <span class="badge badge-secondary">React</span>
-                        </div>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Mar 2021 - Present</span>
-                    </div>
-                </div>
-
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/nycanx.png" alt="NYCANX Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">NYCANX - B2B Cannabis Auction Platform</h3>
-                                <div class="subheading mb-3">
-                                    <a target="_blank" rel="noopener noreferrer" href="https://nycanx.com/">www.nycanx.com</a>
-                                    <span class="badge badge-success ml-2">Award Winner</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>
-                            Core developer for the New York Cannabis Exchange - an online B2B auction platform modeled after eBay for cannabis products in New York State. Enables growers and distributors to auction products while buyers can easily find and bid. Winner of first place among 30+ teams in University at Buffalo Capstone project competition.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="badge badge-secondary">React.js</span>
-                            <span class="badge badge-secondary">Django</span>
-                            <span class="badge badge-secondary">MySQL</span>
-                            <span class="badge badge-secondary">AWS EC2</span>
-                            <span class="badge badge-secondary">AWS RDS</span>
-                            <span class="badge badge-secondary">REST APIs</span>
-                        </div>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Feb 2023 - Present</span>
-                    </div>
-                </div>
-
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/distributedsystems.png" alt="Distributed Systems Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Distributed File Storage System</h3>
-                                <div class="subheading mb-3">High-Performance Distributed Architecture</div>
-                            </div>
-                        </div>
-                        <p>
-                            Developed a high-performance distributed storage system in Golang featuring consistent hashing, data replication, and strategic storage/retrieval across distributed nodes. Implemented complex distributed algorithms including Chandy-Lamport snapshots and Raft consensus protocol for fault tolerance and consistency.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="badge badge-secondary">Go</span>
-                            <span class="badge badge-secondary">Distributed Systems</span>
-                            <span class="badge badge-secondary">Raft Consensus</span>
-                            <span class="badge badge-secondary">Consistent Hashing</span>
-                            <span class="badge badge-secondary">gRPC</span>
-                        </div>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2022 - Oct 2022</span>
-                    </div>
-                </div>
-
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/irchatbot.png" alt="IR Chatbot Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">Multi-topic Information Retrieval Chatbot</h3>
-                                <div class="subheading mb-3">AI-Powered Search & Analytics Platform</div>
-                            </div>
-                        </div>
-                        <p>
-                            Developed a sophisticated multi-topic information retrieval chatbot hosted on Google Cloud Platform. Uses S-BERT algorithm for query relevance and features real-time query statistics with visualization charts. Achieved seamless natural conversation with follow-up questions and intelligent recommendation system.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="badge badge-secondary">Python</span>
-                            <span class="badge badge-secondary">S-BERT</span>
-                            <span class="badge badge-secondary">Google Cloud</span>
-                            <span class="badge badge-secondary">NLP</span>
-                            <span class="badge badge-secondary">Machine Learning</span>
-                        </div>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2022 - Oct 2022</span>
-                    </div>
-                </div>
-
-                <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                    <div class="resume-content mr-auto">
-                        <div class="d-flex align-items-start">
-                            <div class="project-image-wrapper">
-                                <img src="img/logo/aichatbot.png" alt="AI Chatbot Logo" class="project-image" />
-                            </div>
-                            <div>
-                                <h3 class="mb-0">AI Chatbot with Neural Networks</h3>
-                                <div class="subheading mb-3">
-                                    Philips Healthcare Innovation
-                                    <span class="badge badge-warning ml-2">Hackathon Winner</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>
-                            Designed and developed an advanced chatbot system containing neural network and ML models for intelligent user interaction and problem-solving. Won first place in Philips internal hackathon for innovation and technical excellence. Demonstrated ability to rapidly prototype and deliver AI-powered solutions.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="badge badge-secondary">Python</span>
-                            <span class="badge badge-secondary">Neural Networks</span>
-                            <span class="badge badge-secondary">Machine Learning</span>
-                            <span class="badge badge-secondary">NLP</span>
-                            <span class="badge badge-secondary">TensorFlow</span>
-                        </div>
-                    </div>
-                    <div class="resume-date text-md-right">
-                        <span class="text-primary">Aug 2020 - Nov 2020</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
-            <div class="my-auto">
-                <h2 class="mb-5">Awards &amp; Certifications</h2>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="subheading mb-3">🏆 Professional Recognition</h4>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-trophy text-warning"></i>
-                                <strong>First Place - Capstone Project</strong><br>
-                                University at Buffalo (among 30+ teams) for NYCANX development, 2023
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-trophy text-warning"></i>
-                                <strong>"Take Ownership to Deliver Fast" Award (2x)</strong><br>
-                                Philips for consistently exceeding expectations, 2021
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-trophy text-warning"></i>
-                                <strong>"Eager to Improve & Inspire" Award</strong><br>
-                                Philips Hackathon for AI Chatbot implementation, 2020
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h4 class="subheading mb-3">🎯 Cloud Certifications</h4>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <a href="https://www.credly.com/badges/f1d7a30f-9494-4e9a-9da6-1e98790b7135" target="_blank">
-                                    <strong>AWS Certified Cloud Practitioner</strong>
-                                </a>, 2023
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <a href="https://learn.microsoft.com/api/credentials/share/en-us/KushanDevarajegowda-5934/5224D78E336F0703" target="_blank">
-                                    <strong>Microsoft Certified: Azure Developer Associate</strong>
-                                </a>, 2023
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <a href="https://google.accredible.com/954552ca-6c01-4d63-b113-8fabf7a3ac50" target="_blank">
-                                    <strong>Google Cloud Professional Cloud Developer</strong>
-                                </a>, 2023
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h4 class="subheading mb-3">📋 Professional Frameworks</h4>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <a href="https://www.credly.com/badges/ef7b8dc9-d5d9-49a2-9c23-83a9c0e99bab" target="_blank">
-                                    <strong>Certified SAFe® 5 Practitioner</strong>
-                                </a>, 2021
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h4 class="subheading mb-3">💻 Technical Skills Enhancement</h4>
-                        <ul class="fa-ul mb-0">
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>Advanced Design Patterns & Principles</strong>, LinkedIn Learning, 2020
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>Microservices Architecture Foundations</strong>, LinkedIn Learning, 2020
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>C# Framework Design & Advanced Concepts</strong>, LinkedIn Learning, 2020
-                            </li>
-                            <li>
-                                <i class="fa-li fa fa-certificate text-warning"></i>
-                                <strong>Quantum Computing & Cryptography</strong>, LinkedIn Learning, 2020
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
     </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scrollProgress"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="profile-section">
+            <div class="profile-img">
+                <img src="img/profile.jpg" alt="Kushan Devarajegowda">
+            </div>
+            <div class="profile-name">Kushan Devarajegowda</div>
+            <div class="profile-title">R&D Software Engineer</div>
+        </div>
+
+        <div class="nav-menu">
+            <div class="nav-item">
+                <a href="#hero" class="nav-link active" data-section="hero">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#about" class="nav-link" data-section="about">
+                    <i class="fas fa-user"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#experience" class="nav-link" data-section="experience">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Experience</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#education" class="nav-link" data-section="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Education</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#skills" class="nav-link" data-section="skills">
+                    <i class="fas fa-code"></i>
+                    <span>Skills</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#projects" class="nav-link" data-section="projects">
+                    <i class="fas fa-rocket"></i>
+                    <span>Projects</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#awards" class="nav-link" data-section="awards">
+                    <i class="fas fa-trophy"></i>
+                    <span>Awards</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <section class="section hero-section" id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Kushan Devarajegowda</h1>
+                    <p class="hero-subtitle">R&D Software Engineer at Broadcom</p>
+                    <p class="hero-description">
+                        Code wizard by day, system architect by night! Turning complex problems into elegant solutions
+                        for since 2017. Currently building the future of wireless tech at Broadcom, one microservice at a time.
+                        I make distributed systems play nice and APIs that actually work on the first try (plot twist: they don't, but I fix them fast!).
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            View My Work
+                        </a>
+                        <a href="mailto:kushanraj13@yahoo.in" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">About Me</h2>
+                    <div style="font-size: 1.1rem; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;">
+                        <p style="margin-bottom: 2rem;">
+                            Hey there! 👋 I'm a productivity-obsessed developer who builds internal tools and infrastructure solutions that make complex workflows feel like magic!
+                            Currently at Broadcom, where I architect and develop the behind-the-scenes systems that keep engineering teams productive and happy (yes, both are possible!).
+                        </p>
+                        <p style="margin-bottom: 2rem;">
+                            With a Master's in Computer Science and hands-on experience across the full development spectrum, I specialize in creating solutions that bridge the gap between business needs and technical reality.
+                            Whether it's building REST APIs that handle enterprise-scale traffic, designing cloud infrastructure that scales effortlessly, or creating internal platforms that turn tedious manual processes into one-click operations -
+                            I make it happen! I'm fluent in everything from low-level C++ to modern web frameworks.
+                        </p>
+                        <p style="margin-bottom: 2rem;">
+                            From Amazon's sophisticated automation pipelines to VMware's enterprise infrastructure, I've built systems that power developer productivity at massive scale.
+                            I'm that engineer who gets genuinely excited about optimizing deployment processes, loves building APIs so intuitive they barely need documentation,
+                            and believes that great internal tools are the secret weapon of high-performing engineering teams! 🛠️✨
+                        </p>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                            <div style="background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                                <div style="background: var(--primary-gradient); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                    <i class="fas fa-rocket" style="color: white; font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 style="margin-bottom: 0.5rem;">Currently at Broadcom</h3>
+                                <p style="color: var(--text-secondary); margin: 0;">Building wireless tech that doesn't randomly disconnect (revolutionary concept!)</p>
+                            </div>
+
+                            <div style="background: rgba(245, 87, 108, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                                <div style="background: var(--secondary-gradient); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                    <i class="fas fa-lightbulb" style="color: white; font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 style="margin-bottom: 0.5rem;">Always Shipping</h3>
+                                <p style="color: var(--text-secondary); margin: 0;">Building cool stuff that makes developers' lives easier (including my own future self)</p>
+                            </div>
+
+                            <div style="background: rgba(79, 172, 254, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                                <div style="background: var(--accent-gradient); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                    <i class="fas fa-coffee" style="color: white; font-size: 1.5rem;"></i>
+                                </div>
+                                <h3 style="margin-bottom: 0.5rem;">Coffee & Code</h3>
+                                <p style="color: var(--text-secondary); margin: 0;">Always up for tech talks, code reviews, or debates about tabs vs spaces (team spaces, fight me!)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section" id="experience">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="experience-grid">
+
+                        <!-- Broadcom -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/broadcom.png" alt="Broadcom" class="company-logo">
+                                <div class="job-info">
+                                    <h3>R&D Engineer Software 3</h3>
+                                    <div class="job-company">Broadcom, San Jose, CA</div>
+                                    <div class="job-duration">Feb 2024 – Present</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Develop leading-edge IC characterization test software solutions, <strong>targeting the RF portion of wireless cellular handsets</strong> to ensure optimal performance and compliance.</li>
+                                <li>Automate various processes related to data management, analysis, visualization, and reporting, <strong>improving efficiency and reducing manual intervention</strong>.</li>
+                                <li>Support a wide internal user base across multiple Broadcom teams and global sites, <strong>focusing on software scalability, modularity, and standardization</strong> for maximum efficiency.</li>
+                                <li>Develop backend .NET software using object-oriented programming principles, <strong>ensuring robust and maintainable code architecture</strong>.</li>
+                                <li>Design innovative and efficient test algorithms, <strong>reducing overall test times and simplifying user experience</strong> while maintaining accuracy.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Amazon -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/amazon.png" alt="Amazon" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Software Development Engineer</h3>
+                                    <div class="job-company">Amazon, Seattle, WA</div>
+                                    <div class="job-duration">May 2023 – Aug 2023</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Contributed to the development of a robust ML infrastructure pipeline, <strong>specifically designed for high-scale, real-time and precise risk assessments</strong> for identifying potential IP infringements.</li>
+                                <li>Engineered a scalable API service, <strong>enabling efficient bulk product integration into the risk evaluation pipeline</strong>.</li>
+                                <li>Created a user-centric web interface using React with TypeScript, <strong>offering real-time tracking and reporting of risk evaluations</strong>.</li>
+                                <li>Utilized serverless architecture with AWS Fargate <strong>enhancing system scalability while cutting operational costs by 20%</strong>.</li>
+                                <li>Achieved 99% code coverage through comprehensive unit testing, <strong>ensuring the reliability of the API service</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- VMware -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/vmware.png" alt="VMware" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Member of Technical Staff 3</h3>
+                                    <div class="job-company">VMware, Bangalore, India</div>
+                                    <div class="job-duration">Jan 2022 – Aug 2022</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Enhanced the performance and user experience of VMware Workspace ONE, a distributed cloud service, <strong>for a smoother and more efficient digital workspace solution</strong>.</li>
+                                <li>Improved system performance by conducting detailed analysis and optimization of database queries and API calls, <strong>reducing API response times and enabling more efficient user interactions</strong>.</li>
+                                <li>Engaged in collaborative code reviews and mentored junior developers, <strong>enhancing code quality and team skill sets</strong>.</li>
+                                <li>Actively participated in design reviews and addressed design flaws to <strong>ensure product adaptability and scalability challenges</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Philips -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/philips.jpg" alt="Philips" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Software Engineer 2</h3>
+                                    <div class="job-company">Philips, Bangalore, India</div>
+                                    <div class="job-duration">May 2020 – Jan 2022</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Collaboratively worked on an IoT data collection project focused on clinical devices, <strong>enhancing efficiency and enabling predictive analysis of device failure</strong>.</li>
+                                <li>Achieved 100% test coverage through unit tests and further optimized testing by reducing effort by 40% via integration tests, <strong>resulting in a 25% time saving in the testing phase</strong>.</li>
+                                <li>Worked on serverless batch data processing and storing, <strong>offering a scalable and cost-effective solution for clinical data</strong>.</li>
+                                <li>Implemented a remote service for device management, <strong>facilitating real-time updates and remote troubleshooting</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- TeleDNA -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/teledna.jpg" alt="TeleDNA" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Senior Software Engineer</h3>
+                                    <div class="job-company">TeleDNA Communications, Bangalore, India</div>
+                                    <div class="job-duration">Nov 2019 – May 2020</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Redesigned the entire SMS Center (SMSC) system for enhanced scalability and performance, <strong>ensuring robust system functionality to handle increased messaging traffic efficiently</strong>.</li>
+                                <li>Led the integration of omni-channel messaging platforms, including WhatsApp and other messenger services, <strong>facilitating a seamless multi-channel communication environment</strong>.</li>
+                                <li>Developed and optimized back-end systems primarily using C++ on a Linux platform, incorporating technologies such as Apache Kafka and SQL to <strong>enhance data processing capabilities and system reliability</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- One Identity -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/oneidentity.png" alt="One Identity" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Associate Software Development Engineer</h3>
+                                    <div class="job-company">One Identity, Bangalore, India</div>
+                                    <div class="job-duration">Oct 2018 – Nov 2019</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Strengthened system security with advanced authorization, <strong>reinforcing the company's leadership in IAM</strong>.</li>
+                                <li>Integrated federated authentication using Azure Active Directory, <strong>enhancing user security and management</strong>.</li>
+                                <li>Added caching strategies for STS microservice, <strong>reducing API latency by 30% and improving user experience</strong>.</li>
+                                <li>Incorporated role-based access control (RBAC) through OAuth 2.0, <strong>refining user permissions and security</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Applied Materials -->
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/applied-materials.png" alt="Applied Materials" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Software Engineer</h3>
+                                    <div class="job-company">Applied Materials, Bangalore, India</div>
+                                    <div class="job-duration">Aug 2017 – Aug 2018</div>
+                                </div>
+                            </div>
+                            <ul class="achievements">
+                                <li>Developed and enhanced a test automation framework, focusing on robust real-time robotic software, which <strong>significantly improved testing processes</strong>.</li>
+                                <li>Contributed to a critical simulation software project that simulates real-world behaviors of fab robots by generating analog and digital signals, <strong>enhancing the system's predictive capabilities</strong>.</li>
+                                <li>Utilized technologies such as C++, C#, Windows, Jira, and ClearCase in an Agile environment, <strong>applying expertise in algorithms, data structures, WinForms, and socket programming</strong>.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section" id="education">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Education</h2>
+                    <div class="experience-grid">
+
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/ub.png" alt="University at Buffalo" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Master of Science - Computer Science</h3>
+                                    <div class="job-company">University at Buffalo, NY</div>
+                                    <div class="job-duration">Aug 2022 - Jan 2024</div>
+                                </div>
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                                <strong>GPA: 3.75</strong> | <strong>Track:</strong> Distributed Cloud Systems
+                            </div>
+                            <ul class="achievements">
+                                <li><strong>Courseworks:</strong> Distributed Systems, Information Retrieval, Database Systems, Machine Learning, Advanced Data Structures, Modern Networking Concepts, Design and Analysis of Algorithms, Project Development & Wireless Networks Security.</li>
+                                <li><strong>Accomplishments:</strong> Served as a Graduate Teaching Assistant for Modern Networking Concepts, leading weekly discussions, grading assignments and exams, assisting course development, and maintaining a positive learning environment.</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-card">
+                            <div class="company-header">
+                                <img src="img/logo/toce.jpg" alt="Oxford College" class="company-logo">
+                                <div class="job-info">
+                                    <h3>Bachelor of Science - Computer Science</h3>
+                                    <div class="job-company">The Oxford College of Engineering (VTU), Bangalore</div>
+                                    <div class="job-duration">Aug 2013 - Jul 2017</div>
+                                </div>
+                            </div>
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(245, 87, 108, 0.1); border-radius: 10px;">
+                                <strong>GPA: 3.5 Equivalent</strong> | <strong>Track:</strong> Software Engineering
+                            </div>
+                            <ul class="achievements">
+                                <li><strong>Courseworks:</strong> Operating Systems, Software Engineering, Database Management Systems, Compiler Design, Network Security, Data Structures, Java Programming, .Net Programming, Software Testing, Unix, and Object-Oriented Programming in C++.</li>
+                                <li><strong>Accomplishments:</strong> Organized and led well-attended technical workshops on web development, software design, and cybersecurity for students, with positive feedback from participants and faculty.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Skills & Technologies</h2>
+                    <div class="skills-grid">
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-code" style="color: #667eea;"></i> Programming Languages</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Go</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">C</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-server" style="color: #f5576c;"></i> Backend Frameworks</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">.NET Core</span>
+                                <span class="skill-tag">ASP.NET</span>
+                                <span class="skill-tag">Spring Boot</span>
+                                <span class="skill-tag">Django</span>
+                                <span class="skill-tag">Flask</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Express.js</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-desktop" style="color: #4facfe;"></i> Frontend Technologies</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">JavaScript ES6+</span>
+                                <span class="skill-tag">Responsive Design</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-database" style="color: #28a745;"></i> Databases & Storage</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">Redis</span>
+                                <span class="skill-tag">Cassandra</span>
+                                <span class="skill-tag">NoSQL</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-cloud" style="color: #fd7e14;"></i> Cloud Platforms</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Azure</span>
+                                <span class="skill-tag">Google Cloud</span>
+                                <span class="skill-tag">AWS Lambda</span>
+                                <span class="skill-tag">AWS Fargate</span>
+                                <span class="skill-tag">AWS EC2</span>
+                                <span class="skill-tag">AWS S3</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-cogs" style="color: #6c757d;"></i> DevOps & Tools</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">Jenkins</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">GitHub Actions</span>
+                                <span class="skill-tag">CI/CD</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-stream" style="color: #dc3545;"></i> Message Queues & APIs</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Apache Kafka</span>
+                                <span class="skill-tag">RabbitMQ</span>
+                                <span class="skill-tag">REST APIs</span>
+                                <span class="skill-tag">gRPC</span>
+                                <span class="skill-tag">GraphQL</span>
+                                <span class="skill-tag">Protobuf</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3><i class="fas fa-project-diagram" style="color: #17a2b8;"></i> Architecture & Design</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Microservices</span>
+                                <span class="skill-tag">Distributed Systems</span>
+                                <span class="skill-tag">Event-Driven Architecture</span>
+                                <span class="skill-tag">Design Patterns</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div class="projects-grid">
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <img src="img/logo/puppyworld.jpg" alt="PuppyWorld" class="project-icon">
+                                <div class="project-info">
+                                    <h3>PuppyWorld - Complete Pet Service Platform</h3>
+                                    <span class="project-status status-live">Live Production</span>
+                                </div>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-description">
+                                    Spearheaded a complete cloud-based pet service platform from concept to production. Features include
+                                    breed identification using ML.Net, comprehensive encyclopedia, e-commerce portal, community forums,
+                                    and adoption portal. Demonstrates end-to-end cloud application lifecycle management.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">.NET Core</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                    <span class="tech-tag">Redis</span>
+                                    <span class="tech-tag">Azure</span>
+                                    <span class="tech-tag">ML.Net</span>
+                                    <span class="tech-tag">React</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <img src="img/logo/nycanx.png" alt="NYCANX" class="project-icon">
+                                <div class="project-info">
+                                    <h3>NYCANX - B2B Cannabis Auction Platform</h3>
+                                    <span class="project-status status-award">Award Winner</span>
+                                </div>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-description">
+                                    Core developer for the New York Cannabis Exchange - an online B2B auction platform modeled after eBay
+                                    for cannabis products. Winner of first place among 30+ teams in University at Buffalo Capstone project competition.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">React.js</span>
+                                    <span class="tech-tag">Django</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">AWS EC2</span>
+                                    <span class="tech-tag">AWS RDS</span>
+                                    <span class="tech-tag">REST APIs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <img src="img/logo/distributedsystems.png" alt="Distributed Systems" class="project-icon">
+                                <div class="project-info">
+                                    <h3>Distributed File Storage System</h3>
+                                </div>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-description">
+                                    Developed a high-performance distributed storage system in Golang featuring consistent hashing,
+                                    data replication, and strategic storage/retrieval across distributed nodes. Implemented Raft consensus protocol.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Go</span>
+                                    <span class="tech-tag">Distributed Systems</span>
+                                    <span class="tech-tag">Raft Consensus</span>
+                                    <span class="tech-tag">Consistent Hashing</span>
+                                    <span class="tech-tag">gRPC</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <img src="img/logo/irchatbot.png" alt="IR Chatbot" class="project-icon">
+                                <div class="project-info">
+                                    <h3>Multi-topic Information Retrieval Chatbot</h3>
+                                </div>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-description">
+                                    Developed a sophisticated multi-topic information retrieval chatbot hosted on Google Cloud Platform.
+                                    Uses S-BERT algorithm for query relevance and features real-time query statistics with visualization charts.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">S-BERT</span>
+                                    <span class="tech-tag">Google Cloud</span>
+                                    <span class="tech-tag">NLP</span>
+                                    <span class="tech-tag">Machine Learning</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <img src="img/logo/aichatbot.png" alt="AI Chatbot" class="project-icon">
+                                <div class="project-info">
+                                    <h3>AI Chatbot with Neural Networks</h3>
+                                    <span class="project-status status-award">Hackathon Winner</span>
+                                </div>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-description">
+                                    Designed and developed an advanced chatbot system containing neural network and ML models for intelligent
+                                    user interaction. Won first place in Philips internal hackathon for innovation and technical excellence.
+                                </p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Neural Networks</span>
+                                    <span class="tech-tag">Machine Learning</span>
+                                    <span class="tech-tag">NLP</span>
+                                    <span class="tech-tag">TensorFlow</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section class="section" id="awards">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Awards & Certifications</h2>
+                    <div class="awards-grid">
+
+                        <div class="award-category">
+                            <h3><i class="fas fa-trophy" style="color: #ffc107;"></i> Professional Recognition</h3>
+                            <ul class="award-list">
+                                <li>
+                                    <div class="award-title">First Place - Capstone Project</div>
+                                    <div class="award-org">University at Buffalo (among 30+ teams) for NYCANX development, 2023</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">"Take Ownership to Deliver Fast" Award (2x)</div>
+                                    <div class="award-org">Philips for consistently exceeding expectations, 2021</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">"Eager to Improve & Inspire" Award</div>
+                                    <div class="award-org">Philips Hackathon for AI Chatbot implementation, 2020</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="award-category">
+                            <h3><i class="fas fa-cloud" style="color: #4facfe;"></i> Cloud Certifications</h3>
+                            <ul class="award-list">
+                                <li>
+                                    <div class="award-title">AWS Certified Cloud Practitioner</div>
+                                    <div class="award-org">Amazon Web Services, 2023</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">Microsoft Certified: Azure Developer Associate</div>
+                                    <div class="award-org">Microsoft, 2023</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">Google Cloud Professional Cloud Developer</div>
+                                    <div class="award-org">Google Cloud, 2023</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="award-category">
+                            <h3><i class="fas fa-certificate" style="color: #28a745;"></i> Professional Frameworks</h3>
+                            <ul class="award-list">
+                                <li>
+                                    <div class="award-title">Certified SAFe® 5 Practitioner</div>
+                                    <div class="award-org">Scaled Agile, Inc., 2021</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="award-category">
+                            <h3><i class="fas fa-laptop-code" style="color: #6c757d;"></i> Technical Skills Enhancement</h3>
+                            <ul class="award-list">
+                                <li>
+                                    <div class="award-title">Advanced Design Patterns & Principles</div>
+                                    <div class="award-org">LinkedIn Learning, 2020</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">Microservices Architecture Foundations</div>
+                                    <div class="award-org">LinkedIn Learning, 2020</div>
+                                </li>
+                                <li>
+                                    <div class="award-title">Quantum Computing & Cryptography</div>
+                                    <div class="award-org">LinkedIn Learning, 2020</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="content-section animate-in">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                            I'm always interested in hearing about new opportunities, innovative projects,
+                            or just having a chat about technology and software engineering.
+                        </p>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Location</h3>
+                            <p>San Jose, CA, United States</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:kushanraj13@yahoo.in" style="color: var(--text-primary);">kushanraj13@yahoo.in</a></p>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Phone</h3>
+                            <p><a href="tel:(716) 256-4670" style="color: var(--text-primary);">(716) 256-4670</a></p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/kushan-devarajegowda/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/devkushgowda" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:kushanraj13@yahoo.in" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    // Special handling for hero section to scroll to absolute top
+                    if (targetId === '#hero') {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+
+                // Update active navigation
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Close mobile menu if open
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+
+        // Scroll progress bar
+        function updateScrollProgress() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navigation highlighting based on scroll position
+        function updateActiveNavigation() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let currentSectionId = '';
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSectionId = section.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavigation);
+
+        // Enhanced hover effects for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) rotateX(5deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // Initialize particles and other features
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateScrollProgress();
+            updateActiveNavigation();
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add typing effect to hero title
+        function typeWriter() {
+            const text = "Hello, I'm Kushan!";
+            const element = document.querySelector('.hero-title');
+            if (element) {
+                element.style.borderRight = '2px solid white';
+                element.style.animation = 'blink 1s infinite';
+
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        element.textContent = text.slice(0, i + 1);
+                        i++;
+                        setTimeout(type, 100);
+                    } else {
+                        element.style.borderRight = 'none';
+                    }
+                }
+                type();
+            }
+        }
+
+        // Add CSS for blinking cursor
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes blink {
+                0%, 50% { border-color: white; }
+                51%, 100% { border-color: transparent; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
 </body>
 
 </html>
