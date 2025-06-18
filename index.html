@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.14.0/devicon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -41,6 +44,310 @@
             overflow-x: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+        }
+
+        /* Print Styles - Professional Resume Format */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: white !important;
+                font-family: 'Times New Roman', serif !important;
+                font-size: 11pt !important;
+                line-height: 1.4 !important;
+                color: #000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Hide web-only elements */
+            .sidebar, .mobile-toggle, .animated-bg, .particles,
+            .scroll-progress, .loading-screen, .hero-section,
+            .cta-buttons, .social-links, .download-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+            }
+
+            .section {
+                padding: 0 !important;
+                min-height: auto !important;
+                page-break-inside: avoid;
+                margin-bottom: 15pt !important;
+            }
+
+            .content-section {
+                background: white !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                backdrop-filter: none !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Print Header */
+            .print-header {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 20pt;
+                padding-bottom: 10pt;
+                border-bottom: 2pt solid #000;
+            }
+
+            .print-name {
+                font-size: 18pt !important;
+                font-weight: bold !important;
+                margin-bottom: 5pt;
+                text-transform: uppercase;
+                letter-spacing: 1pt;
+            }
+
+            .print-title {
+                font-size: 12pt !important;
+                font-style: italic;
+                margin-bottom: 5pt;
+            }
+
+            .print-contact {
+                font-size: 10pt !important;
+                line-height: 1.2;
+            }
+
+            /* Section Titles */
+            .section-title {
+                font-size: 14pt !important;
+                font-weight: bold !important;
+                text-transform: uppercase;
+                border-bottom: 1pt solid #000 !important;
+                padding-bottom: 3pt !important;
+                margin-bottom: 10pt !important;
+                margin-top: 15pt !important;
+                background: none !important;
+                color: #000 !important;
+                -webkit-background-clip: unset !important;
+                -webkit-text-fill-color: unset !important;
+                background-clip: unset !important;
+                text-align: left !important;
+            }
+
+                .section-title::after {
+                    display: none !important;
+                }
+
+            /* Experience Cards */
+            .experience-grid {
+                display: block !important;
+                gap: 0 !important;
+            }
+
+            .experience-card {
+                background: white !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                margin-bottom: 12pt !important;
+                page-break-inside: avoid;
+                transform: none !important;
+            }
+
+                .experience-card::before {
+                    display: none !important;
+                }
+
+            .company-header {
+                display: block !important;
+                margin-bottom: 5pt !important;
+            }
+
+            .company-logo {
+                display: none !important;
+            }
+
+            .job-info h3 {
+                font-size: 12pt !important;
+                font-weight: bold !important;
+                margin-bottom: 2pt !important;
+                color: #000 !important;
+            }
+
+            .job-company {
+                font-size: 11pt !important;
+                font-weight: bold !important;
+                color: #000 !important;
+            }
+
+            .job-duration {
+                font-size: 10pt !important;
+                background: none !important;
+                color: #000 !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                display: inline !important;
+                font-weight: normal !important;
+                margin-top: 0 !important;
+            }
+
+            .achievements {
+                margin-top: 5pt !important;
+                margin-left: 15pt !important;
+            }
+
+                .achievements li {
+                    font-size: 10pt !important;
+                    margin: 3pt 0 !important;
+                    padding-left: 0 !important;
+                    line-height: 1.3 !important;
+                    list-style-type: disc !important;
+                }
+
+                    .achievements li::before {
+                        display: none !important;
+                    }
+
+            /* Skills Section */
+            .skills-grid {
+                display: block !important;
+                columns: 2;
+                column-gap: 20pt;
+            }
+
+            .skill-category {
+                background: white !important;
+                border: none !important;
+                padding: 0 !important;
+                margin-bottom: 8pt !important;
+                break-inside: avoid;
+                transform: none !important;
+            }
+
+                .skill-category h3 {
+                    font-size: 11pt !important;
+                    font-weight: bold !important;
+                    margin-bottom: 3pt !important;
+                    color: #000 !important;
+                }
+
+            .skill-tags {
+                line-height: 1.2 !important;
+            }
+
+            .skill-tag {
+                display: inline !important;
+                background: none !important;
+                color: #000 !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                font-size: 10pt !important;
+                font-weight: normal !important;
+            }
+
+                .skill-tag:after {
+                    content: ', ';
+                }
+
+                .skill-tag:last-child:after {
+                    content: '';
+                }
+
+            /* Education */
+            .awards-grid,
+            .projects-grid {
+                display: block !important;
+            }
+
+            .award-category,
+            .project-card {
+                background: white !important;
+                border: none !important;
+                padding: 0 !important;
+                margin-bottom: 8pt !important;
+                transform: none !important;
+            }
+
+            .award-list {
+                margin-left: 15pt !important;
+            }
+
+                .award-list li {
+                    font-size: 10pt !important;
+                    margin: 3pt 0 !important;
+                    padding: 0 !important;
+                    background: none !important;
+                    border-radius: 0 !important;
+                    border-left: none !important;
+                    list-style-type: disc !important;
+                }
+
+            .award-title,
+            .project-info h3 {
+                font-weight: bold !important;
+                font-size: 10pt !important;
+                color: #000 !important;
+            }
+
+            .award-org {
+                font-size: 9pt !important;
+                color: #000 !important;
+            }
+
+            /* Contact Section */
+            .contact-info {
+                display: block !important;
+                text-align: center;
+            }
+
+            .contact-item {
+                display: inline-block !important;
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 10pt !important;
+                border-radius: 0 !important;
+                border: none !important;
+                transform: none !important;
+            }
+
+            .contact-icon {
+                display: none !important;
+            }
+
+            .contact-item h3 {
+                display: none !important;
+            }
+
+            .contact-item p {
+                font-size: 10pt !important;
+                margin: 0 !important;
+            }
+
+            /* Page breaks */
+            .section#experience {
+                page-break-before: auto;
+            }
+
+            .section#skills {
+                page-break-before: avoid;
+            }
+        }
+
+        /* Print-only header */
+        .print-header {
+            display: none;
         }
 
         /* Animated Background */
@@ -114,6 +421,36 @@
                 opacity: 0;
             }
         }
+
+        /* Download Button */
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-gradient);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--shadow-intense);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+            .download-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            }
+
+            .download-btn:active {
+                transform: scale(0.95);
+            }
 
         /* Sidebar Navigation */
         .sidebar {
@@ -842,6 +1179,14 @@
             .awards-grid {
                 grid-template-columns: 1fr;
             }
+
+            .download-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
         }
 
         /* Scroll Progress */
@@ -923,6 +1268,21 @@
     <button class="mobile-toggle" id="mobileToggle">
         <i class="fas fa-bars"></i>
     </button>
+
+    <!-- Download Button -->
+    <button class="download-btn" id="downloadBtn" title="Download Resume PDF">
+        <i class="fas fa-download"></i>
+    </button>
+
+    <!-- Print Header (only visible when printing) -->
+    <div class="print-header">
+        <div class="print-name">Kushan Devarajegowda</div>
+        <div class="print-title">R&D Software Engineer</div>
+        <div class="print-contact">
+            San Jose, CA, United States | (716) 256-4670 | kushanraj13@yahoo.in<br>
+            LinkedIn: linkedin.com/in/kushan-devarajegowda | GitHub: github.com/devkushgowda
+        </div>
+    </div>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar" id="sidebar">
@@ -1076,17 +1436,17 @@
                             <div class="company-header">
                                 <img src="img/logo/broadcom.png" alt="Broadcom" class="company-logo">
                                 <div class="job-info">
-                                    <h3>R&D Engineer Software 3</h3>
+                                    <h3>R&D Engineer</h3>
                                     <div class="job-company">Broadcom, San Jose, CA</div>
-                                    <div class="job-duration">Feb 2024 – Present</div>
+                                    <div class="job-duration">Feb 2024 – Present · 1 yr 5 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Develop leading-edge IC characterization test software solutions, <strong>targeting the RF portion of wireless cellular handsets</strong> to ensure optimal performance and compliance.</li>
-                                <li>Automate various processes related to data management, analysis, visualization, and reporting, <strong>improving efficiency and reducing manual intervention</strong>.</li>
-                                <li>Support a wide internal user base across multiple Broadcom teams and global sites, <strong>focusing on software scalability, modularity, and standardization</strong> for maximum efficiency.</li>
-                                <li>Develop backend .NET software using object-oriented programming principles, <strong>ensuring robust and maintainable code architecture</strong>.</li>
-                                <li>Design innovative and efficient test algorithms, <strong>reducing overall test times and simplifying user experience</strong> while maintaining accuracy.</li>
+                                <li>Developed <strong>large-scale data collection framework</strong> for wafer characterization automation test data, implementing distributed processing architecture that handles millions of test data points daily</li>
+                                <li>Created an <strong>interactive visualization platform</strong> for viewing test results and statistics, featuring real-time dashboards with React frontend and RESTful backend services</li>
+                                <li>Collaborated with cross-functional teams to ensure <strong>seamless integration of framework</strong> into existing RF testing systems, reducing manual intervention by 60% and improving data accuracy</li>
+                                <li>Architected <strong>microservices-based testing infrastructure</strong> using .NET Core, enabling parallel test execution across multiple semiconductor fabrication sites</li>
+                                <li>Implemented <strong>advanced caching strategies</strong> and database optimization techniques, reducing test data retrieval times by 45% and improving overall system throughput</li>
                             </ul>
                         </div>
 
@@ -1097,15 +1457,16 @@
                                 <div class="job-info">
                                     <h3>Software Development Engineer</h3>
                                     <div class="job-company">Amazon, Seattle, WA</div>
-                                    <div class="job-duration">May 2023 – Aug 2023</div>
+                                    <div class="job-duration">May 2023 – Aug 2023 · 4 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Contributed to the development of a robust ML infrastructure pipeline, <strong>specifically designed for high-scale, real-time and precise risk assessments</strong> for identifying potential IP infringements.</li>
-                                <li>Engineered a scalable API service, <strong>enabling efficient bulk product integration into the risk evaluation pipeline</strong>.</li>
-                                <li>Created a user-centric web interface using React with TypeScript, <strong>offering real-time tracking and reporting of risk evaluations</strong>.</li>
-                                <li>Utilized serverless architecture with AWS Fargate <strong>enhancing system scalability while cutting operational costs by 20%</strong>.</li>
-                                <li>Achieved 99% code coverage through comprehensive unit testing, <strong>ensuring the reliability of the API service</strong>.</li>
+                                <li>Contributed to the development of a <strong>robust ML infrastructure pipeline</strong>, specifically designed for high-scale, real-time and precise risk assessments for identifying potential IP infringements in retail listing products across the globe</li>
+                                <li>Engineered a <strong>scalable API service</strong>, enabling efficient bulk product integration into the risk evaluation pipeline with support for processing 100K+ products per hour</li>
+                                <li>Created a <strong>user-centric web interface using React with TypeScript</strong>, offering real-time tracking and reporting of risk evaluations with intuitive dashboards and automated alerting systems</li>
+                                <li>Utilized <strong>serverless architecture with AWS Fargate</strong> enhancing system scalability while cutting operational costs by 20% through optimized resource allocation and auto-scaling policies</li>
+                                <li>Implemented up to <strong>60% coverage of integration tests</strong> for both functional and non-functional requirements, integrated into the CI/CD pipeline to improve system stability and efficiency</li>
+                                <li>Achieved <strong>99% code coverage through comprehensive unit testing</strong>, ensuring the reliability of the API service and reducing production bugs by 85%</li>
                             </ul>
                         </div>
 
@@ -1114,16 +1475,17 @@
                             <div class="company-header">
                                 <img src="img/logo/vmware.png" alt="VMware" class="company-logo">
                                 <div class="job-info">
-                                    <h3>Member of Technical Staff 3</h3>
+                                    <h3>Senior Software Engineer</h3>
                                     <div class="job-company">VMware, Bangalore, India</div>
-                                    <div class="job-duration">Jan 2022 – Aug 2022</div>
+                                    <div class="job-duration">Feb 2022 – Aug 2022 · 7 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Enhanced the performance and user experience of VMware Workspace ONE, a distributed cloud service, <strong>for a smoother and more efficient digital workspace solution</strong>.</li>
-                                <li>Improved system performance by conducting detailed analysis and optimization of database queries and API calls, <strong>reducing API response times and enabling more efficient user interactions</strong>.</li>
-                                <li>Engaged in collaborative code reviews and mentored junior developers, <strong>enhancing code quality and team skill sets</strong>.</li>
-                                <li>Actively participated in design reviews and addressed design flaws to <strong>ensure product adaptability and scalability challenges</strong>.</li>
+                                <li>Part of <strong>VMware Workspace ONE development</strong>, focusing on improving the digital platform's user experience and scalability for enterprise clients managing thousands of devices</li>
+                                <li>Achieved a significant reduction in latency by <strong>optimizing database queries</strong>, resulting in a 30% decrease in response time and improved user satisfaction scores</li>
+                                <li>Assisted in transforming the product into a <strong>Software as a Service (SaaS) offering</strong>, ensuring seamless deployment, scalability, and adaptability to meet diverse client requirements</li>
+                                <li>Implemented <strong>advanced microservices architecture patterns</strong> and REST API design principles, enabling horizontal scaling and improved system maintainability</li>
+                                <li>Contributed to <strong>cloud migration strategies</strong> and infrastructure optimization, reducing operational overhead and improving system reliability by 25%</li>
                             </ul>
                         </div>
 
@@ -1133,15 +1495,16 @@
                                 <img src="img/logo/philips.jpg" alt="Philips" class="company-logo">
                                 <div class="job-info">
                                     <h3>Software Engineer 2</h3>
-                                    <div class="job-company">Philips, Bangalore, India</div>
-                                    <div class="job-duration">May 2020 – Jan 2022</div>
+                                    <div class="job-company">Philips Innovation Campus, Bangalore, India</div>
+                                    <div class="job-duration">May 2020 – Jan 2022 · 1 yr 9 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Collaboratively worked on an IoT data collection project focused on clinical devices, <strong>enhancing efficiency and enabling predictive analysis of device failure</strong>.</li>
-                                <li>Achieved 100% test coverage through unit tests and further optimized testing by reducing effort by 40% via integration tests, <strong>resulting in a 25% time saving in the testing phase</strong>.</li>
-                                <li>Worked on serverless batch data processing and storing, <strong>offering a scalable and cost-effective solution for clinical data</strong>.</li>
-                                <li>Implemented a remote service for device management, <strong>facilitating real-time updates and remote troubleshooting</strong>.</li>
+                                <li>Worked collaboratively on an <strong>IoT data collection project</strong>, focusing on enhancing the efficiency of data transfer from clinical devices, while also enabling predictive analysis of device failure, leading to proactive maintenance</li>
+                                <li>Led the comprehensive development of <strong>unit and integration tests</strong> for remote data transfer, covering 100% of testing needs, and reducing testing time by 25% through automation frameworks</li>
+                                <li>Took the initiative to document and present <strong>"Better Programming Hacks"</strong> to the development team, contributing to a 20% acceleration in the code review lifecycle and improved code quality standards</li>
+                                <li>Implemented <strong>serverless data processing pipelines</strong> using AWS Lambda and Apache Kafka for real-time clinical device monitoring and analysis</li>
+                                <li>Developed <strong>RESTful microservices</strong> for healthcare device management, enabling remote configuration and diagnostics across distributed medical facilities</li>
                             </ul>
                         </div>
 
@@ -1151,14 +1514,16 @@
                                 <img src="img/logo/teledna.jpg" alt="TeleDNA" class="company-logo">
                                 <div class="job-info">
                                     <h3>Senior Software Engineer</h3>
-                                    <div class="job-company">TeleDNA Communications, Bangalore, India</div>
-                                    <div class="job-duration">Nov 2019 – May 2020</div>
+                                    <div class="job-company">TeleDNA Communications Pvt Ltd, Bangalore, India</div>
+                                    <div class="job-duration">Nov 2019 – May 2020 · 7 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Redesigned the entire SMS Center (SMSC) system for enhanced scalability and performance, <strong>ensuring robust system functionality to handle increased messaging traffic efficiently</strong>.</li>
-                                <li>Led the integration of omni-channel messaging platforms, including WhatsApp and other messenger services, <strong>facilitating a seamless multi-channel communication environment</strong>.</li>
-                                <li>Developed and optimized back-end systems primarily using C++ on a Linux platform, incorporating technologies such as Apache Kafka and SQL to <strong>enhance data processing capabilities and system reliability</strong>.</li>
+                                <li>Redesigned the entire <strong>SMS Center (SMSC) system</strong> for enhanced scalability and performance, ensuring robust system functionality to handle increased messaging traffic efficiently</li>
+                                <li>Led the integration of <strong>omni-channel messaging platforms</strong>, including WhatsApp and other messenger services, facilitating a seamless multi-channel communication environment</li>
+                                <li>Developed and optimized <strong>back-end systems primarily using C++</strong> on a Linux platform, incorporating technologies such as Apache Kafka and SQL to enhance data processing capabilities and system reliability</li>
+                                <li>Implemented <strong>high-throughput message routing algorithms</strong> capable of processing millions of messages per day with sub-second latency</li>
+                                <li>Designed <strong>fault-tolerant distributed messaging architecture</strong> with automatic failover mechanisms and real-time monitoring capabilities</li>
                             </ul>
                         </div>
 
@@ -1167,33 +1532,17 @@
                             <div class="company-header">
                                 <img src="img/logo/oneidentity.png" alt="One Identity" class="company-logo">
                                 <div class="job-info">
-                                    <h3>Associate Software Development Engineer</h3>
-                                    <div class="job-company">One Identity, Bangalore, India</div>
-                                    <div class="job-duration">Oct 2018 – Nov 2019</div>
-                                </div>
-                            </div>
-                            <ul class="achievements">
-                                <li>Strengthened system security with advanced authorization, <strong>reinforcing the company's leadership in IAM</strong>.</li>
-                                <li>Integrated federated authentication using Azure Active Directory, <strong>enhancing user security and management</strong>.</li>
-                                <li>Added caching strategies for STS microservice, <strong>reducing API latency by 30% and improving user experience</strong>.</li>
-                                <li>Incorporated role-based access control (RBAC) through OAuth 2.0, <strong>refining user permissions and security</strong>.</li>
-                            </ul>
-                        </div>
-
-                        <!-- Applied Materials -->
-                        <div class="experience-card">
-                            <div class="company-header">
-                                <img src="img/logo/applied-materials.png" alt="Applied Materials" class="company-logo">
-                                <div class="job-info">
                                     <h3>Software Engineer</h3>
-                                    <div class="job-company">Applied Materials, Bangalore, India</div>
-                                    <div class="job-duration">Aug 2017 – Aug 2018</div>
+                                    <div class="job-company">One Identity, Bangalore, India</div>
+                                    <div class="job-duration">Oct 2018 – Nov 2019 · 1 yr 2 mos</div>
                                 </div>
                             </div>
                             <ul class="achievements">
-                                <li>Developed and enhanced a test automation framework, focusing on robust real-time robotic software, which <strong>significantly improved testing processes</strong>.</li>
-                                <li>Contributed to a critical simulation software project that simulates real-world behaviors of fab robots by generating analog and digital signals, <strong>enhancing the system's predictive capabilities</strong>.</li>
-                                <li>Utilized technologies such as C++, C#, Windows, Jira, and ClearCase in an Agile environment, <strong>applying expertise in algorithms, data structures, WinForms, and socket programming</strong>.</li>
+                                <li>Played a crucial role in <strong>strengthening system security</strong> through the development and integration of advanced authorization services. Helped safeguard sensitive data from unauthorized access, contributing to the company's leadership in IAM solutions</li>
+                                <li>Implemented <strong>federated authentication by integrating with Azure Active Directory</strong>, enhancing security and user management across enterprise environments</li>
+                                <li>Built <strong>caching mechanisms for distributed microservices</strong> aimed at efficient user info retrieval, resulting in a 30% decrease in web latency and improved response times for OTP challenges, thereby bolstering system performance and scalability</li>
+                                <li>Developed <strong>OAuth 2.0 and SAML-based authentication protocols</strong>, enabling secure single sign-on across multiple enterprise applications</li>
+                                <li>Implemented <strong>role-based access control (RBAC) systems</strong> with fine-grained permissions management, supporting complex organizational hierarchies and compliance requirements</li>
                             </ul>
                         </div>
 
@@ -1621,7 +1970,7 @@
 
     <script>
         // Loading Animation
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hidden');
             }, 1500);
@@ -1644,7 +1993,7 @@
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
@@ -1678,7 +2027,7 @@
         });
 
         // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
+        document.getElementById('mobileToggle').addEventListener('click', function () {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         });
@@ -1699,7 +2048,7 @@
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
@@ -1738,24 +2087,108 @@
 
         // Enhanced hover effects for project cards
         document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-10px) rotateX(5deg)';
             });
 
-            card.addEventListener('mouseleave', function() {
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0) rotateX(0)';
             });
         });
 
+        // PDF Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            // Show loading state
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            this.style.pointerEvents = 'none';
+
+            // Create a clone of the main content for PDF
+            const element = document.createElement('div');
+            element.style.backgroundColor = 'white';
+            element.style.color = 'black';
+            element.style.fontFamily = 'Times New Roman, serif';
+            element.style.fontSize = '11pt';
+            element.style.lineHeight = '1.4';
+            element.style.padding = '20px';
+
+            // Add print header
+            element.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 20pt; padding-bottom: 10pt; border-bottom: 2pt solid #000;">
+                        <div style="font-size: 18pt; font-weight: bold; margin-bottom: 5pt; text-transform: uppercase; letter-spacing: 1pt;">KUSHAN DEVARAJEGOWDA</div>
+                        <div style="font-size: 12pt; font-style: italic; margin-bottom: 5pt;">R&D Software Engineer</div>
+                        <div style="font-size: 10pt; line-height: 1.2;">
+                            San Jose, CA, United States | (716) 256-4670 | kushanraj13@yahoo.in<br>
+                            LinkedIn: linkedin.com/in/kushan-devarajegowda | GitHub: github.com/devkushgowda
+                        </div>
+                    </div>
+                `;
+
+            // Add sections content (simplified for PDF)
+            const sections = ['about', 'experience', 'education', 'skills', 'projects', 'awards'];
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionClone = section.cloneNode(true);
+                    // Remove web-specific elements and simplify content
+                    const simplified = simplifyContentForPDF(sectionClone);
+                    element.appendChild(simplified);
+                }
+            });
+
+            const opt = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: 'Kushan_Devarajegowda_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'letter',
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Reset button
+                this.innerHTML = '<i class="fas fa-download"></i>';
+                this.style.pointerEvents = 'auto';
+            }).catch((error) => {
+                console.error('PDF generation failed:', error);
+                // Reset button
+                this.innerHTML = '<i class="fas fa-download"></i>';
+                this.style.pointerEvents = 'auto';
+                alert('PDF generation failed. Please try again.');
+            });
+        });
+
+        // Function to simplify content for PDF
+        function simplifyContentForPDF(element) {
+            // Remove or replace web-specific elements
+            const toRemove = element.querySelectorAll('.company-logo, .contact-icon, .social-links, .cta-buttons, .hero-section');
+            toRemove.forEach(el => el.remove());
+
+            // Simplify styles
+            element.style.background = 'white';
+            element.style.color = 'black';
+            element.style.fontFamily = 'Times New Roman, serif';
+
+            return element;
+        }
+
         // Initialize particles and other features
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             createParticles();
             updateScrollProgress();
             updateActiveNavigation();
         });
 
         // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrolled = window.pageYOffset;
             const heroSection = document.querySelector('.hero-section');
             if (heroSection) {
@@ -1763,45 +2196,13 @@
             }
         });
 
-        // Add typing effect to hero title
-        function typeWriter() {
-            const text = "Hello, I'm Kushan!";
-            const element = document.querySelector('.hero-title');
-            if (element) {
-                element.style.borderRight = '2px solid white';
-                element.style.animation = 'blink 1s infinite';
-
-                let i = 0;
-                function type() {
-                    if (i < text.length) {
-                        element.textContent = text.slice(0, i + 1);
-                        i++;
-                        setTimeout(type, 100);
-                    } else {
-                        element.style.borderRight = 'none';
-                    }
-                }
-                type();
-            }
-        }
-
-        // Add CSS for blinking cursor
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes blink {
-                0%, 50% { border-color: white; }
-                51%, 100% { border-color: transparent; }
-            }
-        `;
-        document.head.appendChild(style);
-
         // Enhanced button hover effects
         document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
+            btn.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-3px) scale(1.05)';
             });
 
-            btn.addEventListener('mouseleave', function() {
+            btn.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
